@@ -43,33 +43,48 @@ public:
     }
 };
 
-class ShapeFactory {
+class ShapeCreator {
     public:
-        static unique_ptr<Shape> createShape(const std::string& shapeType, double a, double b = 0) {
-            if (shapeType == "circle") {
-                return std::make_unique<Circle>(a);
-            } else if (shapeType == "square") {
-                return std::make_unique<Square>(a);
-            } else if (shapeType == "rectangle") {
-                return std::make_unique<Rectangle>(a, b);
-            } else {
-                throw std::invalid_argument("Unknown shape type");
-            }
+        virtual Shape* create(double a, double b = 0) = 0;
+        virtual ~ShapeCreator() {}
+};
+    
+class CircleCreator : public ShapeCreator {
+    public:
+        Shape* create(double a, double b = 0) override {
+            return new Circle(a);
+        }
+};
+    
+class SquareCreator : public ShapeCreator {
+    public:
+        Shape* create(double a, double b = 0) override {
+            return new Square(a);
+        }
+};
+    
+class RectangleCreator : public ShapeCreator {
+    public:
+        Shape* create(double a, double b = 0) override {
+            return new Rectangle(a, b);
         }
 };
 
 TEST(ShapeTest, CircleArea) {
-    auto circle = ShapeFactory::createShape("circle", 3);
+    CircleCreator creator;
+    Shape* circle = creator.create(3);
     EXPECT_NEAR(circle->area(), M_PI * 9, 1e-6);
 }
 
 TEST(ShapeTest, SquareArea) {
-    auto square = ShapeFactory::createShape("square", 4);
+    SquareCreator creator;
+    Shape* square = creator.create(4);
     EXPECT_DOUBLE_EQ(square->area(), 16);
 }
 
 TEST(ShapeTest, RectangleArea) {
-    auto rect = ShapeFactory::createShape("rectangle", 3, 5);
+    RectangleCreator creator;
+    Shape* rect = creator.create(3, 5);
     EXPECT_DOUBLE_EQ(rect->area(), 15);
 }
 
