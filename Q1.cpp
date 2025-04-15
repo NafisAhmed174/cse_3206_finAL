@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include <gtest/gtest.h>
 using namespace std;
 // #include <gtest/gtest.h>
 
@@ -9,11 +10,11 @@ clang++ -std=c++17 -I /opt/homebrew/Cellar/googletest/1.16.0/include \
 */
 
 /*
-g++ -std=c++17 test.cpp \
+g++ -std=c++17 Q1.cpp \
 -I/opt/homebrew/opt/googletest/include \
 -L/opt/homebrew/opt/googletest/lib \
 -lgtest -lgtest_main -pthread \
--o test && ./test
+-o Q1 && ./Q1
 */
 
 class Shape{
@@ -64,14 +65,30 @@ class ShapeFactory {
         }
 };
 
+TEST(ShapeTest, CircleArea) {
+    auto circle = ShapeFactory::createShape("circle", 3);
+    EXPECT_NEAR(circle->area(), M_PI * 9, 1e-6);
+}
+
+TEST(ShapeTest, SquareArea) {
+    auto square = ShapeFactory::createShape("square", 4);
+    EXPECT_DOUBLE_EQ(square->area(), 16);
+}
+
+TEST(ShapeTest, RectangleArea) {
+    auto rect = ShapeFactory::createShape("rectangle", 3, 5);
+    EXPECT_DOUBLE_EQ(rect->area(), 15);
+}
 
 int main(int argc, char **argv){
-    auto c = ShapeFactory::createShape("circle", 3);
-    auto s = ShapeFactory::createShape("square", 4);
-    auto r = ShapeFactory::createShape("rectangle", 3, 5);
+    // auto c = ShapeFactory::createShape("circle", 3);
+    // auto s = ShapeFactory::createShape("square", 4);
+    // auto r = ShapeFactory::createShape("rectangle", 3, 5);
 
-    std::cout << "Circle Area: " << c->area() << "\n";
-    std::cout << "Square Area: " << s->area() << "\n";
-    std::cout << "Rectangle Area: " << r->area() << "\n";
+    // std::cout << "Circle Area: " << c->area() << "\n";
+    // std::cout << "Square Area: " << s->area() << "\n";
+    // std::cout << "Rectangle Area: " << r->area() << "\n";
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
     return 0;
 }
