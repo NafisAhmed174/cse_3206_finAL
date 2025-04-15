@@ -66,5 +66,12 @@ class ShapeFactory {
 
 
 int main(int argc, char **argv){
+    auto c = ShapeFactory::createShape("circle", 3);
+    auto s = ShapeFactory::createShape("square", 4);
+    auto r = ShapeFactory::createShape("rectangle", 3, 5);
+
+    std::cout << "Circle Area: " << c->area() << "\n";
+    std::cout << "Square Area: " << s->area() << "\n";
+    std::cout << "Rectangle Area: " << r->area() << "\n";
     return 0;
 }
