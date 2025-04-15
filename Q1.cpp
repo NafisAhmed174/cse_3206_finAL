@@ -1,13 +1,6 @@
 #include<iostream>
 #include <gtest/gtest.h>
 using namespace std;
-// #include <gtest/gtest.h>
-
-/*
-clang++ -std=c++17 -I /opt/homebrew/Cellar/googletest/1.16.0/include \
-    -L /opt/homebrew/Cellar/googletest/1.16.0/lib \
-    -lgtest -lgtest_main -pthread banking.cpp -o banking
-*/
 
 /*
 g++ -std=c++17 Q1.cpp \
