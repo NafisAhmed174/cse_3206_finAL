@@ -1,0 +1,5 @@
+create a c++ program using the factory method to create different chapes(circle, squeare, rectangel ) and compute their areas.
+requirements:
+1. implement a shapefactory that returns the appropiate shape object
+2. each shape should have an area() method 
+3. write gtest unit tests for area calculation of each object
