@@ -21,9 +21,32 @@ class shape{
 };
 
 
-class shapeFactory(){
-    
-}
+class Circle : public Shape {
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    double area() const override {
+        return M_PI * radius * radius;
+    }
+};
+
+class Square : public Shape {
+    double side;
+public:
+    Square(double s) : side(s) {}
+    double area() const override {
+        return side * side;
+    }
+};
+
+class Rectangle : public Shape {
+    double width, height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double area() const override {
+        return width * height;
+    }
+};
 
 
 int main(int argc, char **argv)
@@ -33,3 +56,5 @@ int main(int argc, char **argv)
 }
 
 
+//   git config --global user.email "you@example.com"
+//   git config --global user.name "Your Name"
