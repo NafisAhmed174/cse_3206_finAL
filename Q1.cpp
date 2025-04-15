@@ -1,6 +1,6 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
-#include <gtest/gtest.h>
+// #include <gtest/gtest.h>
 
 /*
 clang++ -std=c++17 -I /opt/homebrew/Cellar/googletest/1.16.0/include \
@@ -16,8 +16,9 @@ g++ -std=c++17 test.cpp \
 -o test && ./test
 */
 
-class shape{
-    double area() = 0;
+class Shape{
+public:
+    virtual double area() const = 0;
 };
 
 
@@ -48,13 +49,22 @@ public:
     }
 };
 
+class ShapeFactory {
+    public:
+        static unique_ptr<Shape> createShape(const std::string& shapeType, double a, double b = 0) {
+            if (shapeType == "circle") {
+                return std::make_unique<Circle>(a);
+            } else if (shapeType == "square") {
+                return std::make_unique<Square>(a);
+            } else if (shapeType == "rectangle") {
+                return std::make_unique<Rectangle>(a, b);
+            } else {
+                throw std::invalid_argument("Unknown shape type");
+            }
+        }
+};
 
-int main(int argc, char **argv)
-{
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+
+int main(int argc, char **argv){
+    return 0;
 }
-
-
-//   git config --global user.email "you@example.com"
-//   git config --global user.name "Your Name"
